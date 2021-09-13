@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,42 +18,28 @@ use App\Http\Controllers\PageController;
 |
 */
 
-//praktikum 3 - 1 (halaman home)
-Route:: get('/',[PageController::class,'halamanHome']);
+//praktikum 1 minggu ke-3 - 1 (halaman home)
+Route::get('/', [PageController::class, 'landing_page']);
 
-//praktikum 3 - 2 (halaman program studi prefix)
+//praktikum 1 minggu ke-3 - 2 (halaman program studi prefix)
 Route::prefix('prodi')->group(function(){
-    Route::get('/manajemen-informatika', function(){
-        return "Jurusan Manajemen Informatika";
-    });
-    Route::get('/teknik-informatika', function(){
-        return "Jurusan Teknnik informatika";
-    });
+    Route::get('/manajemen-informatika',[ProdiController::class, 'mi_page']);
+    Route::get('/teknik-informatika',[ProdiController::class, 'ti_page']);
 });
 
 //praktikum 3 - 3 (halaman news param + controller)
-Route:: get('news/{id}',[PageController::class,'halamannews']);
+Route:: get('news/{id}',[NewsController::class,'halamannews']);
 
 //praktikum 3 - 4 (halaman sarana prefic)
 Route::prefix('sarana')->group(function(){
-    Route::get('/perkantoran', function(){
-        return "ruangan perkantoran";
-    });
-    Route::get('/laboratorium', function(){
-        return "ruangan laboratorium";
-    });
-    Route::get('/kelas', function(){
-        return "ruangan kelas";
-    });
-    Route::get('/lainnya', function(){
-        return "sarana lain-lain...";
-    });
+    Route::get('/perkantoran',[SaranaController::class, 'saranakantor']);
+    Route::get('/laboratorium',[SaranaController::class, 'saranalab']);
+    Route::get('/kelas',[SaranaController::class, 'saranakelas']);
+    Route::get('/lainnya',[SaranaController::class, 'saranalainnya']);
 });
 
 //praktikum 3 - 5 (about)
-Route::get('aboutus', function(){
-    echo "[2031710121] Raden Dimas Erlangga";
-});
+Route::get('/about', [PageController::class, 'about_page']);
 
 //praktikum 3 - 6 (halaman comment + controller)
-Route:: get('{nama}/{id}',[PageController::class,'halamancomment']);
+Route:: get('comment/{nama}/{id}',[CommentController::class,'halamancomment']);

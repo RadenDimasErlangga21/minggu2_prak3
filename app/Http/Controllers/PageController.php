@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function halamanHome(){
-        return 'Halaman Home';
+    public function landing_page(){
+        return view ('home');
     }
-    public function halamannews($id){
-        return 'berita ke-'.$id;
-    }
-    public function halamancomment($nama,$id){
-        return $nama.' Berkomentar : '.$id;
+    public function about_page(){
+        return view ('about-us');
     }
 }
 
